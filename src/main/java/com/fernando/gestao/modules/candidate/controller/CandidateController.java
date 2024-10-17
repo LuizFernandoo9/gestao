@@ -3,6 +3,8 @@ package com.fernando.gestao.modules.candidate.controller;
 import com.fernando.gestao.exceptions.UserFoundException;
 import com.fernando.gestao.modules.candidate.model.CandidateModel;
 import com.fernando.gestao.modules.candidate.repository.CandidateRepository;
+import com.fernando.gestao.modules.candidate.service.CreateCandidateService;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,17 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class CandidateController {
 
     @Autowired
-    private CandidateRepository candidateRepository;
+    private CreateCandidateService createCandidateService;
 
     @PostMapping("/")
-    public ResponseEntity create(@Valid @RequestBody CandidateModel candidateModel){
-        this.candidateRepository.findByUsernameOrEmail(candidateModel.getUsername(), candidateModel.getEmail())
-                .ifPresent((user) -> {throw new UserFoundException();
-                });
-
-        var candidate = this.candidateRepository.save(candidateModel);
-        return ResponseEntity.status(HttpStatus.OK).body(candidate);
-
+    public ResponseEntity<Object> create(@Valid @RequestBody CandidateModel candidateModel){
+        try {
+            var candidate = this.createCandidateService.create(candidateModel);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(candidateModel);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
 }
