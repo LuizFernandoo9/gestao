@@ -24,7 +24,7 @@ public class CandidateController {
     @PostMapping("/")
     public ResponseEntity<Object> create(@Valid @RequestBody CandidateModel candidateModel){
         try {
-            var candidate = this.createCandidateService.create(candidateModel);
+            var candidate = this.createCandidateService.execute(candidateModel);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(candidateModel);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

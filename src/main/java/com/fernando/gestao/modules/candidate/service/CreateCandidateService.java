@@ -15,7 +15,7 @@ public class CreateCandidateService {
     @Autowired
     private CandidateRepository candidateRepository;
 
-    public CandidateModel create(CandidateModel candidateModel){
+    public CandidateModel execute(CandidateModel candidateModel){
         this.candidateRepository.findByUsernameOrEmail(candidateModel.getUsername(), candidateModel.getEmail())
                 .ifPresent((user) -> {throw new UserFoundException();
                 });
