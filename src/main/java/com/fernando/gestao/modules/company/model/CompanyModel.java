@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-@Entity(name = "COMPANY")
+@Entity(name = "company")
 public class CompanyModel {
 
     @Id
