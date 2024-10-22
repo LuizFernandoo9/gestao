@@ -22,11 +22,12 @@ public class AuthCompanyController {
     private AuthCompanyService authCompany;
 
     @PostMapping("/company")
-    public ResponseEntity<Object> create(@Valid @RequestBody AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
+    public ResponseEntity<Object> create(@RequestBody AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
         try{
             var authCompany = this.authCompany.execute(authCompanyDTO);
             return ResponseEntity.status(HttpStatus.OK).body(authCompany);
         }catch (Exception e){
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }

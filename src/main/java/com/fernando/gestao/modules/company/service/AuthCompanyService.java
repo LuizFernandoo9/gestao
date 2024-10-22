@@ -6,6 +6,7 @@ import com.fernando.gestao.exceptions.UserFoundException;
 import com.fernando.gestao.modules.company.dto.AuthCompanyDTO;
 import com.fernando.gestao.modules.company.model.CompanyModel;
 import com.fernando.gestao.modules.company.repository.CompanyRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.naming.AuthenticationException;
+import java.time.Duration;
+import java.time.Instant;
 
 @Service
 public class AuthCompanyService {
@@ -27,7 +30,7 @@ public class AuthCompanyService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String execute(@RequestBody AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
+    public String execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
         var company = this.companyRepository.findByUsername(authCompanyDTO.getUsername()).orElseThrow(() -> {
             throw new UsernameNotFoundException("Company not found");
         });
@@ -35,11 +38,12 @@ public class AuthCompanyService {
         var passwordMatches = this.passwordEncoder.matches(authCompanyDTO.getPassword(), company.getPassword());
 
         if(!passwordMatches){
-            throw new AuthenticationException();
+            throw new UsernameNotFoundException("Username/password incorrect");
         }
 
         Algorithm algorithm = Algorithm.HMAC256(secretyKey);
         var token = JWT.create().withIssuer("ITEP")
+                .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
                 .withSubject(company.getId().toString())
                 .sign(algorithm);
         return token;

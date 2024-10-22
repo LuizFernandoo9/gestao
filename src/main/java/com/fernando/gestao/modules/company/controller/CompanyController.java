@@ -24,7 +24,7 @@ public class CompanyController {
             var company = this.companyService.execute(companyModel);
             return ResponseEntity.status(HttpStatus.OK).body(company);
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
 }
