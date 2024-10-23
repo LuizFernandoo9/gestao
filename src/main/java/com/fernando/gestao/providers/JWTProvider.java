@@ -16,6 +16,7 @@ public class JWTProvider {
         token = token.replace("Bearer ", "");
 
         Algorithm algorithm = Algorithm.HMAC256(secretyKey);
+
         try {
             var subject = JWT.require(algorithm).build().verify(token).getSubject();
             return subject;
