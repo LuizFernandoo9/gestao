@@ -1,8 +1,7 @@
 package com.fernando.gestao.modules.candidate.controller;
 
-import com.fernando.gestao.exceptions.UserFoundException;
+
 import com.fernando.gestao.modules.candidate.model.CandidateModel;
-import com.fernando.gestao.modules.candidate.repository.CandidateRepository;
 import com.fernando.gestao.modules.candidate.service.CreateCandidateService;
 
 import jakarta.validation.Valid;
@@ -25,7 +24,7 @@ public class CandidateController {
     public ResponseEntity<Object> create(@Valid @RequestBody CandidateModel candidateModel){
         try {
             var candidate = this.createCandidateService.execute(candidateModel);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(candidateModel);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(candidate);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

@@ -2,8 +2,8 @@ package com.fernando.gestao.modules.company.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.fernando.gestao.dto.AuthCompanyDTO;
 import com.fernando.gestao.exceptions.UserFoundException;
-import com.fernando.gestao.modules.company.dto.AuthCompanyDTO;
 import com.fernando.gestao.modules.company.model.CompanyModel;
 import com.fernando.gestao.modules.company.repository.CompanyRepository;
 import jakarta.validation.Valid;

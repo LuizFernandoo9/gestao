@@ -1,6 +1,6 @@
 package com.fernando.gestao.modules.job.controller;
 
-import com.fernando.gestao.modules.company.dto.AuthJobDTO;
+import com.fernando.gestao.dto.AuthJobDTO;
 import com.fernando.gestao.modules.job.model.JobModel;
 import com.fernando.gestao.modules.job.service.JobService;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,11 +1,9 @@
 package com.fernando.gestao.modules.company.controller;
 
-import com.fernando.gestao.modules.company.dto.AuthCompanyDTO;
+import com.fernando.gestao.dto.AuthCompanyDTO;
 import com.fernando.gestao.modules.company.service.AuthCompanyService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -2,9 +2,10 @@ package com.fernando.gestao.modules.candidate.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.fernando.gestao.dto.AuthCandidateDTORequest;
+import com.fernando.gestao.dto.AuthCandidateDTOResponse;
 import com.fernando.gestao.modules.candidate.repository.CandidateRepository;
-import com.fernando.gestao.modules.company.dto.AuthCandidateDTORequest;
-import com.fernando.gestao.modules.company.dto.AuthCandidateDTOResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

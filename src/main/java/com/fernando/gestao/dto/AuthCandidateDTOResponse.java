@@ -1,4 +1,4 @@
-package com.fernando.gestao.modules.company.dto;
+package com.fernando.gestao.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
