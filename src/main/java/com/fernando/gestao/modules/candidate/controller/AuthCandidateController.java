@@ -14,13 +14,13 @@ import com.fernando.gestao.modules.candidate.service.AuthCandidateService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/candidate")
 public class AuthCandidateController {
 
     @Autowired
     private AuthCandidateService authCandidateService;
 
-    @PostMapping("/candidate")
+    @PostMapping("/auth")
     public ResponseEntity<Object> auth(@RequestBody AuthCandidateDTORequest authCandidateDTORequest, HttpServletRequest request){
 
         try{
