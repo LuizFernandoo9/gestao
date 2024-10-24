@@ -21,7 +21,7 @@ public class AuthCandidateController {
     private AuthCandidateService authCandidateService;
 
     @PostMapping("/candidate")
-    public ResponseEntity<Object> create(@RequestBody AuthCandidateDTORequest authCandidateDTORequest, HttpServletRequest request){
+    public ResponseEntity<Object> auth(@RequestBody AuthCandidateDTORequest authCandidateDTORequest, HttpServletRequest request){
 
         try{
             var token = authCandidateService.execute(authCandidateDTORequest);

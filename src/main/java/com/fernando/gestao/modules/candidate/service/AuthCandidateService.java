@@ -48,9 +48,7 @@ public class AuthCandidateService {
                 .withClaim("roles", Arrays.asList("candidate"))
                 .sign(algorithm);
 
-        var authCandidateResponde = AuthCandidateDTOResponse.builder()
-                .access_token(token).build();
-
+        var authCandidateResponde = AuthCandidateDTOResponse.builder().access_token(token).build();
         return authCandidateResponde;
 
     }
