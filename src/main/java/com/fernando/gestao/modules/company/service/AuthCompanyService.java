@@ -3,6 +3,7 @@ package com.fernando.gestao.modules.company.service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fernando.gestao.dto.AuthCompanyDTO;
+import com.fernando.gestao.dto.AuthCompanyResponseDTO;
 import com.fernando.gestao.exceptions.UserFoundException;
 import com.fernando.gestao.modules.company.model.CompanyModel;
 import com.fernando.gestao.modules.company.repository.CompanyRepository;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.naming.AuthenticationException;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Service
 public class AuthCompanyService {
@@ -30,7 +33,7 @@ public class AuthCompanyService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
+    public AuthCompanyResponseDTO execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
         var company = this.companyRepository.findByUsername(authCompanyDTO.getUsername()).orElseThrow(() -> {
             throw new UsernameNotFoundException("Company not found");
         });
@@ -45,7 +48,13 @@ public class AuthCompanyService {
         var token = JWT.create().withIssuer("ITEP")
                 .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
                 .withSubject(company.getId().toString())
+                .withClaim("roles", Arrays.asList("COMPANY"))
                 .sign(algorithm);
-        return token;
+
+                var authCompanyResponseDTO = AuthCompanyResponseDTO.builder()
+                .access_token(token)
+                .build();
+
+        return authCompanyResponseDTO;
     }
 }

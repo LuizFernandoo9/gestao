@@ -45,7 +45,7 @@ public class AuthCandidateService {
                 .withIssuer("ITEP")
                 .withSubject(candidate.getId().toString())
                 .withExpiresAt(Instant.now().plus(Duration.ofMinutes(10)))
-                .withClaim("roles", Arrays.asList("candidate"))
+                .withClaim("roles", Arrays.asList("CANDIDATE"))
                 .sign(algorithm);
 
         var authCandidateResponde = AuthCandidateDTOResponse.builder().access_token(token).build();
